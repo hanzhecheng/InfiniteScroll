@@ -4,7 +4,7 @@ import {
 import InfiniteScroll from "@/components/InfiniteScroll.vue";
 
 describe("InfiniteScroll.vue", () => {
-  it("init virtualList", () => {
+  it("renders", () => {
     let realList = []
     for (let index = 0; index < 50; index++) {
       realList.push(index)
@@ -16,7 +16,10 @@ describe("InfiniteScroll.vue", () => {
     });
     wrapper.vm.$nextTick(() => {
       expect(wrapper.vm.virtualList.length).toBe(15);
+      expect(wrapper.contains("#top")).toBe(true);
+      expect(wrapper.contains("#bottom")).toBe(true);
       done()
     })
   });
+ 
 });
