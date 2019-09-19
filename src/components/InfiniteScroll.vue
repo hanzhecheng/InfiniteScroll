@@ -20,7 +20,7 @@ export default {
       start: 0,
       end: 10,
       virtualList: [],
-      oberver: ""
+      oberver: null
     };
   },
   props: {
@@ -37,6 +37,7 @@ export default {
   },
   mounted() {
     this.$nextTick(() => {
+      //需要nextTick后才能获取到props的值
       this.afterAll();
     });
   },
@@ -55,10 +56,12 @@ export default {
         rootMargin: "0px",
         threshold: 0.1
       };
+      //IntersectionObserver用法链接[https://developer.mozilla.org/zh-CN/docs/Web/API/IntersectionObserver]
       this.observer = new IntersectionObserver(this.callback, options);
       //数组中第一个数据id为top，最后一个id为bottom
       let top = document.querySelector("#top");
       let bottom = document.querySelector("#bottom");
+      //分别检测第一个和最后一个元素
       if (top) {
         this.observer.observe(top);
       }
